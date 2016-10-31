@@ -353,12 +353,16 @@ $images = @(
 	[System.Drawing.Image]::FromFile("$($imagePath)\Halloween_SAPIEN-BUTTON-LOGO-2-Small.png")
 	[System.Drawing.Image]::FromFile("$($imagePath)\Halloween2015.png")
 	[System.Drawing.Image]::FromFile("$($imagePath)\Junes.png")
+	[System.Drawing.Image]::FromFile("$($imagePath)\Geek1.png")
+	[System.Drawing.Image]::FromFile("$($imagePath)\JuneA2016.png")
 )
 
 $titles = @(
 	"Happy Halloween",
 	"Happy Halloween from the SAPIEN Crew",
-	"Happy Halloween from JuneA & JuneB"	
+	"Happy Halloween from JuneA & JuneB",
+	"Happy Halloween from the Boss"
+	"Web development is tough!"
 )
 
 function Set-ImageIndex
