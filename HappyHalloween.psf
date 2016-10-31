@@ -1,6 +1,6 @@
 ﻿<File version="2.1">
   <FileID>0594e227-62c6-4f81-ab37-19573e77b1cb</FileID>
-  <LastExport>131224022305704226</LastExport>
+  <LastExport>131224039322436689</LastExport>
   <Preview>iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAAAXNSR0IArs4c6QAAAARnQU1BAACx
 jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAEAISURBVHhe7d0JeFX3ee9710kcp0nT03TIbdM2
 OT09bW+SNkmb5Nw2HgEhRASYyRoQo7GZEtdumjRJ0wxtcs7pOUl7bnraNI1t5hmBEPMkQEhCgEZA
@@ -332,28 +332,52 @@ w7rnnv8PmOMaDKCTT/sAAAAASUVORK5CYII=</Preview>
     <Property name="ImageSize">256, 256</Property>
     <Property name="TransparentColor">Transparent</Property>
   </Object>
-  <Code><![CDATA[$imageLogo = [System.Drawing.Image]::FromFile('C:\Users\JuneBlender\OneDrive\SAPIEN-juneb-sapien\Art\Halloween_SAPIEN-BUTTON-LOGO-2 - Small.png')
-$imageCrew = [System.Drawing.Image]::FromFile('C:\Users\JuneBlender\OneDrive\SAPIEN-juneb-sapien\Art\Halloween2015.png')
+  <Code><![CDATA[<#	
+	.NOTES
+	===========================================================================
+	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2016 v5.2.129
+	 Created on:   	10/31/2016 10:10 AM
+	 Created by:   	June Blender
+	 Organization: 	SAPIEN Technologies, Inc
+	 Filename:     	HappyHalloween2016.psf
+	===========================================================================
+	.DESCRIPTION
+	A picturebox that loads images from an array.
 
-$formHappyHalloween_Load={	
-	$picturebox1.Image = $imageLogo
+	I didn't use a button and ImageList object, because the max size was 256x256.
+#>
+
+$imageIndex = 0
+$imagePath = "$HOME\OneDrive\SAPIEN-juneb-sapien\Art\Halloween"
+$images = @(
+	[System.Drawing.Image]::FromFile("$($imagePath)\Halloween_SAPIEN-BUTTON-LOGO-2-Small.png")
+	[System.Drawing.Image]::FromFile("$($imagePath)\Halloween2015.png")
+	[System.Drawing.Image]::FromFile("$($imagePath)\Junes.png")
+)
+
+$titles = @(
+	"Happy Halloween",
+	"Happy Halloween from the SAPIEN Crew",
+	"Happy Halloween from JuneA & JuneB"	
+)
+
+function Set-ImageIndex
+{
+	$script:imageIndex = ++$script:imageIndex % $images.count 	
+}
+
+$formHappyHalloween_Load = {
+	$picturebox1.Image = $images[$imageIndex]
+	$formHappyHalloween.Text = $titles[$imageIndex]
 }
 
 $picturebox1_Click = {
-	
-	if ($picturebox1.Image -eq $imageLogo)
-	{
-		$picturebox1.Image = $imageCrew
-		$formHappyHalloween.Text = "Happy Halloween from the SAPIEN Crew"
-	}
-	else
-	{
-		$picturebox1.Image = $imageLogo
-		$formHappyHalloween.Text = "Happy Halloween"
-	}
+	Set-ImageIndex
+	$picturebox1.Image = $images[$script:imageIndex]
+	$formHappyHalloween.Text = $titles[$script:imageIndex]
 }
 ]]></Code>
-  <Mode>0</Mode>
+  <Mode>1</Mode>
   <Assemblies>
     <Assembly>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
     <Assembly>System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
